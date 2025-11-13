@@ -1,0 +1,117 @@
+{
+  "navbar": {
+    "about": "About Us",
+    "products": "Products",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "homepage": {
+    "heroTitle": "Reliable Agrochemicals & Bio-Solutions",
+    "heroSubtitle": "Explore our full range of proven, high-quality products designed for Bangladeshi soil.",
+    "cta": "Explore Products"
+  },
+  "features": {
+    "title": "Why Partner with AIRN?",
+    "item1": {
+      "title": "Eco-Friendly Solutions",
+      "description": "We specialize in high-efficacy bio-fertilizers, safe for the environment and the soil."
+    },
+    "item2": {
+      "title": "Reliable Distribution",
+      "description": "Our robust logistics network ensures you get the products you need, exactly when you need them."
+    },
+    "item3": {
+      "title": "Proven Field Results",
+      "description": "Our products are backed by local field trials, delivering higher yields and proven results for farmers."
+    }
+  },
+  "products": {
+    "title": "Our Core Products",
+    "subtitle": "Specialized solutions, from bio-innovations to essential nutrients.",
+    "item1": {
+      "title": "Organic Fertilizers (জৈব সার)",
+      "description": "Enrich your soil with our high-quality organic matter."
+    },
+    "item2": {
+      "title": "Bio-Fungicides (ট্রাইরুন)",
+      "description": "Protect your crops from disease with powerful, natural solutions."
+    },
+    "item3": {
+      "title": "Micro-Nutrients (সলুবর বোরন)",
+      "description": "Deliver the essential micro-nutrients for maximum plant health."
+    }
+  },
+  "productsPage": {
+    "title": "Our Products",
+    "subtitle": "Explore our full catalog of specialized agricultural solutions.",
+    "cta": "View Details"
+  },
+  "productCategories": {
+    "all": "All",
+    "micro-nutrient": "Micro-Nutrients",
+    "bio-fungicide": "Bio-Fungicides",
+    "organic-fertilizer": "Organic Fertilizers"
+  },
+  "aboutPage": {
+    "title": "About AIRN Agro",
+    "subtitle": "Connecting retailers and farmers with reliable agricultural solutions.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To build a trusted Agro-Inputs Retailers' Network across Bangladesh. We are dedicated to empowering these retailers, providing them with proven, high-quality products so they can effectively serve the farmers who form the backbone of our nation's agriculture."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To be the most reliable and sought-after partner for agricultural retailers in Bangladesh, leading the way in quality, reliability, and innovation from the ground up."
+    },
+    "story": {
+      "title": "Our Story",
+      "text": "Founded in 2018, AIRN Agro was born from a simple goal: to ensure that every farmer has access to the best possible agricultural inputs. We recognized that the most effective way to do this was to partner with the local retailers who farmers trust. Our name, the 'Agro-Inputs Retailers' Network,' is our commitment. We are not just a supplier; we are a partner dedicated to strengthening this vital network."
+    }
+  },
+  "galleryPage": {
+    "title": "Our Gallery",
+    "subtitle": "A glimpse into our products, our partners, and our impact in the field.",
+    "photos": "Photos",
+    "videos": "Videos"
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team. We're here to help our partners succeed.",
+    "office": "Our Office",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "footer": {
+    "about": "A dedicated network providing high-quality, reliable agrochemical solutions and bio-fertilizers to retailers across Bangladesh.",
+    "linksTitle": "Quick Links",
+    "links": {
+      "about": "About Us",
+      "products": "Products",
+      "gallery": "Gallery",
+      "contact": "Contact"
+    },
+    "productsTitle": "Our Products",
+    "products": {
+      "bioFertilizers": "Bio-Fertilizers",
+      "microNutrients": "Micro-Nutrients",
+      "organicFertilizers": "Organic Fertilizers",
+      "bioFungicides": "Bio-Fungicides"
+    },
+    "contactTitle": "Contact Us",
+    "contact": {
+      "address": "Address:",
+      "addressValue": "Darsana Bus Stand, Damurhuda, Chuadanga, Bangladesh",
+      "phone": "Phone:",
+      "phoneValue": "+880 1711425673",
+      "email": "Email:",
+      "emailValue": "airnagroltd@gmail.com"
+    },
+    "socials": {
+      "facebook": "https://www.facebook.com/profile.php?id=61575662897950",
+      "youtube": "https://www.youtube.com/@AIRNAgro-1",
+      "linkedin": "https://www.linkedin.com/company/109893434/"
+    },
+    "copyright": "© 2025 AIRN Agro. All rights reserved."
+  }
+}
