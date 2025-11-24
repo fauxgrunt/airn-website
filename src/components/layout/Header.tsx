@@ -14,7 +14,6 @@ interface HeaderProps {
   dictionary: Dictionary['navbar'];
 }
 
-// --- Helper component for links ---
 function NavLink({
   href,
   children,
@@ -30,16 +29,16 @@ function NavLink({
   isMobile?: boolean;
   onClick?: () => void;
 }) {
-  // Base styles
+  // Mobile specific styles (Big block buttons)
   const baseClasses = isMobile 
     ? '-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50' 
     : 'text-sm font-semibold leading-6 transition-colors';
 
-  // Color logic (Desktop only)
+  // Desktop Color Logic
   const textColor = isTransparent ? 'text-white' : 'text-gray-900';
   const hoverClass = 'hover:text-green-500';
   const activeColor = isTransparent ? 'text-green-400' : 'text-green-600';
-
+  
   // Mobile Color Logic
   const mobileColor = isActive ? 'text-green-600 bg-gray-50' : 'text-gray-900';
 
@@ -50,8 +49,8 @@ function NavLink({
       className={`
         ${baseClasses}
         ${isMobile 
-          ? mobileColor // Mobile styles
-          : (isActive ? activeColor : `${textColor} ${hoverClass}`) // Desktop styles
+          ? mobileColor 
+          : (isActive ? activeColor : `${textColor} ${hoverClass}`) 
         }
       `}
     >
@@ -65,17 +64,19 @@ export function Header({ lang, dictionary }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false); 
   const pathname = usePathname(); 
 
+  // Logic: Only transparent if on Homepage AND at the very top
   const isHomepage = pathname === `/${lang}` || pathname === '/';
   const isTransparent = isHomepage && !isScrolled;
 
-  // --- DYNAMIC LANGUAGE SWITCHER LOGIC ---
+  // Logic: Switch language but keep the current page (e.g. /en/products -> /bn/products)
   const redirectedPathName = (locale: string) => {
     if (!pathname) return '/';
     const segments = pathname.split('/');
-    segments[1] = locale; // Replace the language segment (e.g., 'en' -> 'bn')
+    segments[1] = locale;
     return segments.join('/');
   };
 
+  // Logic: Detect scroll to turn header white
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -89,16 +90,16 @@ export function Header({ lang, dictionary }: HeaderProps) {
   return (
     <header
       className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        fixed top-0 left-0 right-0 z-[100] transition-all duration-300
         ${isTransparent
           ? 'bg-transparent shadow-none' 
-          : 'bg-white/90 shadow-md backdrop-blur-lg' 
+          : 'bg-white shadow-md' // Solid white when scrolled
         }
       `}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         
-        {/* Logo */}
+        {/* Logo Section */}
         <div className="flex lg:flex-1">
           <Link href={`/${lang}`} className="-m-1.5 p-1.5">
             <span className="sr-only">AIRN Agro</span>
@@ -108,11 +109,12 @@ export function Header({ lang, dictionary }: HeaderProps) {
               width={160}
               height={40}
               priority
+              className="h-8 w-auto lg:h-10" // Small on mobile (h-8), Big on desktop (h-10)
             />
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Hamburger Button */}
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -120,11 +122,12 @@ export function Header({ lang, dictionary }: HeaderProps) {
             onClick={() => setMobileMenuOpen(true)} 
           >
             <span className="sr-only">Open main menu</span>
+            {/* Icon changes color based on transparency */}
             <Menu className={`h-6 w-6 ${isTransparent ? 'text-white' : 'text-gray-900'}`} />
           </button>
         </div>
 
-        {/* Desktop Nav Links */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex lg:gap-x-12">
           <NavLink href={`/${lang}/about`} isTransparent={isTransparent} isActive={pathname === `/${lang}/about`}>
             {dictionary.about}
@@ -162,11 +165,16 @@ export function Header({ lang, dictionary }: HeaderProps) {
         </div>
       </nav>
 
-      {/* --- MOBILE MENU OVERLAY --- */}
+      {/* --- MOBILE MENU OVERLAY (Slide-out) --- */}
       {mobileMenuOpen && (
         <div className="lg:hidden" role="dialog" aria-modal="true">
-          <div className="fixed inset-0 z-50" />
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          {/* Backdrop */}
+          <div className="fixed inset-0 z-[100]" />
+          
+          {/* Menu Panel */}
+          <div className="fixed inset-y-0 right-0 z-[100] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            
+            {/* Mobile Header (Logo + Close Button) */}
             <div className="flex items-center justify-between">
               <Link href={`/${lang}`} className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
                 <span className="sr-only">AIRN Agro</span>
@@ -175,6 +183,7 @@ export function Header({ lang, dictionary }: HeaderProps) {
                   alt="AIRN Agro Logo"
                   width={140}
                   height={35}
+                  className="h-8 w-auto"
                 />
               </Link>
               <button
@@ -187,6 +196,7 @@ export function Header({ lang, dictionary }: HeaderProps) {
               </button>
             </div>
             
+            {/* Mobile Links */}
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
