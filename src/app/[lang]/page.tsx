@@ -3,7 +3,7 @@ import { getDictionary } from '@/lib/dictionaries';
 import { Locale } from '@/lib/i18n-config';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Leaf, Truck, BarChart3 } from 'lucide-react'; // Using BarChart3 for Lucide compatibility
+import { Leaf, Truck, BarChart3 } from 'lucide-react'; 
 import { ProductCard } from '@/components/ProductCard';
 import { productDb } from '@/lib/product-data';
 
@@ -14,8 +14,15 @@ export default async function HomePage({
 }) {
   const { homepage, features, products } = await getDictionary(lang);
 
-  // We use the smart ProductDB we built so cards have the Hover/Zoom effects
-  const sampleProducts = productDb.slice(0, 3);
+  // --- FIX: SELECT SPECIFIC PRODUCTS ---
+  // We manually pick the exact 3 products you want, in the order you want.
+  const targetSlugs = ['jaibo-shar-40kg', 'trirun', 'zinc-sulphate'];
+  
+  // This logic finds them in the database and puts them in your list
+  const sampleProducts = targetSlugs
+    .map(slug => productDb.find(p => p.slug === slug))
+    .filter(p => p !== undefined); // Safety check to remove any missing ones
+
   const ctaButtonText = lang === 'bn' ? 'বিস্তারিত দেখুন' : 'View Details';
 
   return (
@@ -30,16 +37,8 @@ export default async function HomePage({
       >
         <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
           
-          {/* MOBILE FIX 1: Padding Top 
-             Changed 'pt-10' to 'pt-32'. 
-             This pushes content down so the fixed header doesn't cover it on mobile.
-          */}
           <div className="px-6 pb-24 pt-32 sm:pb-32 lg:px-8 lg:py-40">
             <div className="mx-auto max-w-lg">
-              {/* MOBILE FIX 2: Text Size 
-                 Changed 'text-4xl' to 'text-3xl'.
-                 This stops the "Zoomed In" feeling on phones.
-              */}
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 {homepage.heroTitle}
               </h1>
@@ -65,7 +64,6 @@ export default async function HomePage({
               objectFit="cover" 
               className="lg:rounded-l-xl"
             />
-             {/* Gradient Overlay for better contrast if needed */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent lg:hidden" />
           </div>
 
@@ -75,12 +73,12 @@ export default async function HomePage({
 
 
       {/* --- SECTION 2: "WHY US?" FEATURES --- */}
-      <div className="py-16 sm:py-32"> {/* Reduced mobile padding */}
+      <div className="py-16 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-center text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             {features.title}
           </h2>
-          <div className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3"> {/* Reduced mobile margin */}
+          <div className="mt-12 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
             
             <div className="text-center">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-lg bg-green-600 text-white">
@@ -134,17 +132,19 @@ export default async function HomePage({
           </p>
 
           <div className="mt-12 grid grid-cols-1 gap-y-16 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
-            {/* Here we use the ProductCard component. 
-               This preserves the Shadow/Zoom effects you liked, 
-               while keeping the layout of your original code.
+            {/* We map over sampleProducts (which now contains only Jaibo, Trirun, and Zinc)
+               but we tell TypeScript "Trust us, these are valid Products" using the 'as any' 
+               or simple map trick to avoid complex type errors in the editor.
             */}
             {sampleProducts.map((product) => (
-              <ProductCard 
-                key={product.slug}
-                lang={lang}
-                product={product}
-                ctaText={ctaButtonText} 
-              />
+              product && (
+                <ProductCard 
+                  key={product.slug}
+                  lang={lang}
+                  product={product}
+                  ctaText={ctaButtonText} 
+                />
+              )
             ))}
           </div>
         </div>
